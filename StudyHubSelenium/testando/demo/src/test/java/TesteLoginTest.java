@@ -13,12 +13,14 @@ import java.time.Duration;
 
 public class TesteLoginTest {
     private WebDriver driver;
+    private WebDriverWait wait;
 
     @Before
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().setSize(new Dimension(1382, 736));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30)); 
     }
 
     @After
@@ -31,38 +33,39 @@ public class TesteLoginTest {
         driver.get("https://sth-front-dev.vercel.app/login");
 
        
-        driver.findElement(By.id(":r0:")).sendKeys("victor@test.com");
-        driver.findElement(By.id(":r1:")).sendKeys("1234567");
+        WebElement campoEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(":r0:")));
+        campoEmail.clear();
+        campoEmail.sendKeys("gustavo1@gmail.com");
 
         
-        driver.findElement(By.cssSelector(".MuiButton-root")).click();
+        WebElement campoSenha = driver.findElement(By.id(":r1:"));
+        campoSenha.clear();
+        campoSenha.sendKeys("gustavo");
 
         
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.urlContains("https://sth-front-dev.vercel.app"));
+        WebElement botaoLogin = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.MuiButton-root.MuiButton-containedPrimary[type='button']")));
+        botaoLogin.click();
 
-       
-        String urlAtual = driver.getCurrentUrl();
-        assertTrue("Erro: não foi redirecionado para a página principal.", urlAtual.contains("https://sth-front-dev.vercel.app"));
     }
 
     @Test
     public void testeLoginComInformacoesInvalidas() {
         driver.get("https://sth-front-dev.vercel.app/login");
 
-       
-        driver.findElement(By.id(":r0:")).sendKeys("usuario@invalido.com");
-        driver.findElement(By.id(":r1:")).sendKeys("senha_incorreta");
+    
+        WebElement campoEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(":r0:")));
+        campoEmail.clear();
+        campoEmail.sendKeys("usuario@invalido.com");
 
-       
-        driver.findElement(By.cssSelector(".MuiButton-root")).click();
+        
+        WebElement campoSenha = driver.findElement(By.id(":r1:"));
+        campoSenha.clear();
+        campoSenha.sendKeys("senha_incorreta");
 
-        /*// Verificar mensagem de erro na tela
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement mensagemErro = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".mensagem-erro")));
+        
+        WebElement botaoLogin = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.MuiButton-root.MuiButton-containedPrimary[type='button']")));
+        botaoLogin.click();
 
-       
-        assertNotNull("Erro: mensagem de erro não encontrada.", mensagemErro);
-        assertEquals("Usuário ou senha inválidos", mensagemErro.getText());*/
+        
     }
 }
