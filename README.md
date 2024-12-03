@@ -32,7 +32,7 @@ STUDYHUBSELENIUM/
 └── README.md                  # Documentação do projeto
 
 
-## Funcionalidades Testadas
+## Funcionalidades Testadas.
 
 Os testes estão organizados em três classes, cada uma cobrindo funcionalidades específicas da aplicação:
 
