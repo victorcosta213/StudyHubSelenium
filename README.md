@@ -5,7 +5,7 @@ Este repositório contém o conjunto de testes automatizados desenvolvidos com S
 ## Estrutura do Projeto
 
 A estrutura de diretórios está organizada da seguinte forma:
-
+STUDYHUBSELENIUM ├── drivers │ └── chromedriver.exe # Driver do navegador Chrome ├── src │ ├── main │ └── test │ └── java │ ├── ArtigosTest.java # Testes relacionados à funcionalidade de artigos │ ├── ComunidadeTest.java # Testes relacionados à funcionalidade de comunidade │ └── TesteLoginTest.java # Testes relacionados à funcionalidade de login ├── target # Arquivos gerados durante a build └── pom.xml # Arquivo de configuração do Maven
 
 
 ## Funcionalidades Testadas
